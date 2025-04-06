@@ -1,4 +1,4 @@
-import { Lids } from "./lids/Lids.model.js";
+import { Lids } from "./lids/lids.model.js";
 import { News } from "./news/news.model.js";
 
 import { Admin } from "./admin/admin.model.js";
