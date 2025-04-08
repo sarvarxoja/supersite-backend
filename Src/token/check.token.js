@@ -5,15 +5,13 @@ export async function checkAdminToken(req, res, next) {
   try {
     let authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader) {
       return res
         .status(401)
         .json({ message: "Access token not found", status: 401 });
     }
 
-    // "Bearer TOKEN" formatidagi tokenni ajratib olish
-    let accessToken = authHeader.split(" ")[1];
-
+    const accessToken = authHeader.split(" ")[1];
     let payload = jwt.verify(accessToken, process.env.SECRET_KEY);
 
     let data = await Admin.findOne({
@@ -29,9 +27,10 @@ export async function checkAdminToken(req, res, next) {
     }
 
     req.admin = data;
-    next();
+    return next();
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
+      // console.log(error);
       return res.status(401).json({ message: "Unauthorized", status: 401 });
     }
 

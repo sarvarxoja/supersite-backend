@@ -10,7 +10,6 @@ export default {
         news_about_eng,
       } = req.body;
 
-      console.log(req.body)
 
       if (
         !news_title_uz ||

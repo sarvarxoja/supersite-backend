@@ -3,11 +3,22 @@ import { asyncWrapper } from "../../middleware/wrapper/asyncWrapper.js";
 
 export class QuestionsController {
   static create = asyncWrapper(async (req, res) => {
-    let { question, answer } = req.body;
+    let {
+      question_uz,
+      question_ru,
+      question_eng,
+      answer_uz,
+      answer_ru,
+      answer_eng,
+    } = req.body;
 
     let createdData = await Questions.create({
-      question,
-      answer,
+      question_uz,
+      question_ru,
+      question_eng,
+      answer_uz,
+      answer_ru,
+      answer_eng,
     });
 
     res.status(201).json({ data: createdData, status: 201 });

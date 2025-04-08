@@ -11,10 +11,10 @@ import { errorHandler } from "./middleware/error/errorHandler.js";
 import { courses_router } from "./routes/courses/courses.routes.js";
 import { questions_router } from "./routes/questions/questions.routes.js";
 
-const app = express();
 
 async function starter() {
   try {
+    const app = express();
     const PORT = process.env.PORT;
 
     app.use(express.json());
@@ -43,5 +43,3 @@ async function starter() {
 }
 
 starter();
-
-export default app;

@@ -80,4 +80,8 @@ export class AuthController {
     const token = await jwtSign(data.id, data.tokenVersion);
     res.json({ accessToken: token, message: "Token refreshed", status: 200 });
   });
+
+  static checkTokenExists = asyncWrapper(async (req, res) => {
+    res.status(200).json({ message: "success", status: 200 });
+  });
 }

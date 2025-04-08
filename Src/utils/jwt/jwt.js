@@ -3,9 +3,9 @@ import jwt from "jsonwebtoken";
 export async function jwtSign(id, version) {
   try {
     const SECRET_KEY = process.env.SECRET_KEY;
-    const expiresIn = 15 * 60;
-    let jwtData = jwt.sign({ id: id, version: version }, SECRET_KEY, {
-      expiresIn,
+
+    const jwtData = jwt.sign({ id, version }, SECRET_KEY, {
+      expiresIn: "7d", // 7 kun
     });
 
     return jwtData;
