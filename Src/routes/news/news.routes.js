@@ -19,6 +19,7 @@ news_router
   .patch(
     "/:id",
     checkAdminToken,
+    upload.single("image"),
     newsMiddleware.UpdateMiddleware,
     NewsController.updateById
   )

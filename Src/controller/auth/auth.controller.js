@@ -35,7 +35,7 @@ export class AuthController {
         });
       } else {
         return res.status(401).json({
-          msg: "wrong phone number or password",
+          msg: "wrong username or password",
           status: 401,
         });
       }

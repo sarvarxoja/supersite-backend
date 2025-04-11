@@ -51,6 +51,21 @@ Courses.init(
       defaultValue: null,
     },
 
+    objective_title_uz: {
+      type: DataTypes.STRING(300),
+      allowNull: false,
+    },
+
+    objective_title_ru: {
+      type: DataTypes.STRING(300),
+      allowNull: false,
+    },
+
+    objective_title_eng: {
+      type: DataTypes.STRING(300),
+      allowNull: false,
+    },
+
     course_objective_uz: {
       type: DataTypes.STRING(500),
       allowNull: false,
@@ -62,6 +77,36 @@ Courses.init(
     },
 
     course_objective_eng: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+    },
+
+    end_title_uz: {
+      type: DataTypes.STRING(300),
+      allowNull: false,
+    },
+
+    end_title_ru: {
+      type: DataTypes.STRING(300),
+      allowNull: false,
+    },
+
+    end_title_eng: {
+      type: DataTypes.STRING(300),
+      allowNull: false,
+    },
+
+    end_info_uz: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+    },
+
+    end_info_ru: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+    },
+
+    end_info_eng: {
       type: DataTypes.STRING(500),
       allowNull: false,
     },

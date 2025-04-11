@@ -16,6 +16,11 @@ Questions.init(
       allowNull: false,
     },
 
+    question_uz: {
+      type: DataTypes.STRING(300),
+      allowNull: false,
+    },
+
     question_eng: {
       type: DataTypes.STRING(300),
       allowNull: false,

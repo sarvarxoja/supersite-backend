@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
 import { Lids } from "../../models/relations.js";
 import { asyncWrapper } from "../../middleware/wrapper/asyncWrapper.js";
+import { sendMessageToGroup } from "../../utils/bot/bot.js";
 
 function getDateRange(type) {
   const now = new Date();
@@ -30,7 +31,8 @@ function getDateRange(type) {
 
 export class LidsController {
   static create = asyncWrapper(async (req, res) => {
-    let { full_name, phone_number, course_name, comment, from_time, to_time } = req.body;
+    let { full_name, phone_number, course_name, comment, from_time, to_time } =
+      req.body;
 
     let createdData = await Lids.create({
       full_name,
@@ -40,6 +42,17 @@ export class LidsController {
       from_time,
       to_time,
     });
+
+    const message = `
+<b>Yangi izoh:</b>\n
+<b>Telefon raqami:</b> ${phone_number}
+<b>Ismi:</b> ${full_name}
+<b>Kurs:</b> ${course_name}
+<b>Vaqt:</b> ${from_time} - ${to_time}
+<b>Izoh:</b> ${comment}
+      `;
+
+    sendMessageToGroup(message);
 
     res.status(201).json({ data: createdData, status: 201 });
   });

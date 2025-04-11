@@ -105,6 +105,10 @@ export class NewsController {
       updateData.id = course.id;
     }
 
+    if (req.file) {
+      updateData.image = `/${req.file.filename}`; // Rasmni yangilash
+    }
+
     await course.update(updateData);
 
     res

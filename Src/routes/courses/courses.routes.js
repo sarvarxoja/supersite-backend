@@ -17,9 +17,11 @@ courses_router
   .get("/get/catalog", CourseController.getCategories)
   .get("/all", CourseController.getAll)
   .get("/by/:id", CourseController.getById)
+  .get("/get/by/catalog", CourseController.getByCatalog)
   .patch(
     "/:id",
     checkAdminToken,
+    upload.single("image"),
     coursesMiddleware.UpdateMiddleware,
     CourseController.updateById
   )

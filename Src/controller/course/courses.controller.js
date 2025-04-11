@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import { Op, Sequelize } from "sequelize";
 import { Courses } from "../../models/relations.js";
 import { asyncWrapper } from "../../middleware/wrapper/asyncWrapper.js";
 
@@ -15,6 +15,15 @@ export class CourseController {
       course_objective_uz,
       course_objective_ru,
       course_objective_eng,
+      objective_title_uz,
+      objective_title_ru,
+      objective_title_eng,
+      end_title_uz,
+      end_title_ru,
+      end_title_eng,
+      end_info_uz,
+      end_info_ru,
+      end_info_eng,
       course_price,
     } = req.body;
 
@@ -36,6 +45,15 @@ export class CourseController {
       course_objective_uz,
       course_objective_ru,
       course_objective_eng,
+      objective_title_uz,
+      objective_title_ru,
+      objective_title_eng,
+      end_title_uz,
+      end_title_ru,
+      end_title_eng,
+      end_info_uz,
+      end_info_ru,
+      end_info_eng,
       course_price: Number(course_price),
     });
 
@@ -132,10 +150,39 @@ export class CourseController {
       updateData.id = course.id;
     }
 
+    // Agar rasm yuborilgan bo'lsa
+    if (req.file) {
+      updateData.image = `/${req.file.filename}`; // Rasmni yangilash
+    }
+
     await course.update(updateData);
 
     res
       .status(200)
       .json({ message: "Course successfully updated", course, status: 200 });
+  });
+
+  static getByCatalog = asyncWrapper(async (req, res) => {
+    const { catalog, page = 1, limit = 10 } = req.query;
+
+    const offset = (page - 1) * limit;
+
+    const whereClause = catalog
+      ? { catalog: { [Op.iLike]: `%${catalog}%` } }
+      : {};
+
+    const { count, rows } = await Courses.findAndCountAll({
+      where: whereClause,
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+      order: [["createdAt", "DESC"]],
+    });
+
+    res.json({
+      totalCourses: count,
+      totalPages: Math.ceil(count / limit),
+      currentPage: parseInt(page),
+      courses: rows,
+    });
   });
 }
